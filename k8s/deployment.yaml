@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nest-k8s-app
+spec: 
+  
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nest-k8s-app
+  template:
+    metadata:
+      labels:
+        app: nest-k8s-app
+    spec:
+      containers:
+      - name: nest-k8s-app
+        image: gabrielbdm/k8spoc
+        resources:
+          limits:
+            memory: 512Mi
+            cpu: "1"
+        ports:
+        - containerPort: 3000
+      
+      

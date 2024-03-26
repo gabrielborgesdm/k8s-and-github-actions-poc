@@ -2,13 +2,22 @@
 FROM node:18-alpine
 
 # Set the working directory in the container
-WORKDIR /usr/src/app
+WORKDIR /
 
-# Copy package.json and package-lock.json to the working directory
+# Copy package.json and package-lock.json files
 COPY package*.json ./
 
-# Install Nest.js dependencies
-RUN npm install
+# Install dependencies
+RUN npm install 
 
-# Copy the rest of the application code to the working directory
+# Expose the port the app runs on
+EXPOSE 3000
+
+# Copy the rest of the application code
 COPY . .
+
+# Build
+RUN npm run build --only=production
+
+# Run nest.js
+CMD ["npm", "run", "start:prod"] 
