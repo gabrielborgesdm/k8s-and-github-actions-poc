@@ -14,6 +14,17 @@ jobs:
       - name: Start minikube
         run: minikube start
 
+      - name: Build docker image
+        run: docker build -t gabrielbdm/k8spoc:latest .
+
+      - name: Push docker image to dockerhub
+        run: docker push gabrielbdm/k8spoc:latest 
+
+      - name: Remove old deployment configuration from Minikube
+        run: |
+          kubectl delete -f k8s/deployment.yaml --ignore-not-found
+          kubectl delete -f k8s/service.yaml --ignore-not-found
+
       - name: Deploy to Minikube
         run: |
           kubectl apply -f k8s/deployment.yaml
