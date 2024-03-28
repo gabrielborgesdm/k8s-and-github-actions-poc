@@ -1,8 +1,5 @@
 # K8S-AND-GITHUB-ACTIONS-POC
 
-1. Build and push dockerfile to dockerhub
-
-
 ## Build and push dockerfile to dockerhub
 
 Start by building the dockerfile:
@@ -25,4 +22,11 @@ Change the `deployment.yml` image to match your image
 If you want to apply it locally to minikube, run the following command to run the deployment:
 ```bash
 kubectl apply -f k8s/deployment.yaml
+kubectl apply -f k8s/service.yaml
+```
+
+## Access the service created on minikube
+If you want to access a NodePort type service on minikube, enter the command bellow, it creates a tunnel to the cluster and exposes the service
+```bash
+minikube service nest-k8s-app --url
 ```
